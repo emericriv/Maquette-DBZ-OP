@@ -1,0 +1,184 @@
+@font-face {
+    font-family: 'Saiyan Sans';
+    src: url('font/Saiyan-Sans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Réinitialiser les marges et le padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Carrousel pleine page */
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Supprime les barres de défilement */
+    background-color: #e76a24;
+    color : #fff;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    list-style: none;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide .left {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active .left{
+    opacity: 1;
+}
+
+.left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 40px;
+    height: 100%;
+}
+
+.left h1 {
+    font-size: 3rem;
+}
+
+.title-header {
+    width : 100%;
+    display: flex;
+    align-items: center;     /* Aligne l'image et le texte verticalement */
+    flex: 0 0 20%; /* Prend 30% de la hauteur */
+}
+
+.pane-index {
+    margin-right: 10px;      /* Espace entre l'image et le texte */
+    height : 50px;
+    width : 50px;
+}
+
+.title {
+    font-family: 'Saiyan Sans', sans-serif;
+    font-size: 50px;
+    word-spacing: -20px; /* Réduit l'espace entre les mots */
+}
+
+.resume{
+    width: 100%;
+    flex: 0 0 55%; /* Prend 50% de la hauteur */
+    overflow-y: auto; /* Ajoutez un défilement si le texte dépasse la hauteur définie */
+    font-size: 1.5rem;
+}
+
+.date{
+    width: 100%;
+    flex: 0 0 25%; /* Prend 20% de la hauteur */
+    display: flex;
+    align-items: center; /* Centrer verticalement la date */
+    font-size: 100px;
+    padding-left: 5%;
+    padding-bottom: 10%;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 40px;
+    height: 100%;
+    overflow: hidden; /* S'assure que l'image n'est pas visible en dehors de ce conteneur */
+}
+
+.right img {
+    display : flex;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    transform: translateX(100%);
+    overflow: hidden;
+}
+
+.slide.toleft>.right img{
+    transform: translateX(-100%); /* Repart à 100% au retrait de la classe instantanément */
+    opacity: 1;
+    z-index: 0;
+}
+
+.slide.previousleft>.right img{
+    transition: transform 1s linear; /* Animation de l'image mais que pour l'apparition */
+    transform: translateX(-100%);
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide.previousright>.right img{
+    transition: transform 1s linear; /* Animation de l'image mais que pour l'apparition */
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide.active>.right img{
+    transition: transform 1s linear; /* Animation de l'image mais que pour l'apparition */
+    transform: translateX(0);
+    opacity: 1;
+    z-index: 1;
+}
+
+.dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
