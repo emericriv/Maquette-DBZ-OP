@@ -44,7 +44,7 @@ function showSlide(index) {
     // Utiliser un délai pour empêcher les animations de se chevaucher
     setTimeout(() => {            
         isAnimating = false; 
-    }, 500); // Assurez-vous que ce délai correspond à la durée de la transition dans le CSS
+    }, 300); // Assurez-vous que ce délai correspond à la durée de la transition dans le CSS
 
 }
 

@@ -35,8 +35,8 @@ body, html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 80%;
-    height: 80%;
+    width: 85%;
+    height: 85%;
     list-style: none;
     overflow: hidden;
 }
@@ -54,7 +54,7 @@ body, html {
 
 .slide .left {
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 300ms ease-in-out;
 }
 
 .slide.active .left{
@@ -62,7 +62,7 @@ body, html {
 }
 
 .left {
-    flex: 2;
+    flex: 3;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -79,7 +79,7 @@ body, html {
     width : 100%;
     display: flex;
     align-items: center;     /* Aligne l'image et le texte verticalement */
-    flex: 0 0 20%; /* Prend 30% de la hauteur */
+    flex: 0 0 15%; /* Prend 30% de la hauteur */
 }
 
 .pane-index {
@@ -96,8 +96,8 @@ body, html {
 
 .resume{
     width: 100%;
-    flex: 0 0 55%; /* Prend 50% de la hauteur */
-    overflow-y: auto; /* Ajoutez un défilement si le texte dépasse la hauteur définie */
+    flex: 0 0 60%; /* Prend 50% de la hauteur */
+    overflow-y: hidden; /* Ajoutez un défilement si le texte dépasse la hauteur définie */
     font-size: 1.5rem;
 }
 
@@ -106,13 +106,13 @@ body, html {
     flex: 0 0 25%; /* Prend 20% de la hauteur */
     display: flex;
     align-items: center; /* Centrer verticalement la date */
+    justify-content: center;
     font-size: 100px;
-    padding-left: 5%;
-    padding-bottom: 10%;
+    padding-top:0;
 }
 
 .right {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -140,21 +140,21 @@ body, html {
 }
 
 .slide.previousleft>.right img{
-    transition: transform 1s linear; /* Animation de l'image mais que pour l'apparition */
+    transition: transform 300ms ease-in-out; /* Animation de l'image mais que pour l'apparition */
     transform: translateX(-100%);
     opacity: 1;
     z-index: 1;
 }
 
 .slide.previousright>.right img{
-    transition: transform 1s linear; /* Animation de l'image mais que pour l'apparition */
+    transition: transform 300ms ease-in-out; /* Animation de l'image mais que pour l'apparition */
     transform: translateX(100%);
     opacity: 1;
     z-index: 1;
 }
 
 .slide.active>.right img{
-    transition: transform 1s linear; /* Animation de l'image mais que pour l'apparition */
+    transition: transform 300ms ease-in-out; /* Animation de l'image mais que pour l'apparition */
     transform: translateX(0);
     opacity: 1;
     z-index: 1;
