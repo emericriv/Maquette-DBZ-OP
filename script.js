@@ -33,9 +33,6 @@ const body = document.body;
 // Allows to know which theme is currently displayed
 let isOpMode = false;
 
-// Used to prevent from changing the theme while an animation is in progress
-const checkbox = document.getElementById('themeToggle');
-
 function showSlide(index) {
     // if an animation is in progress, do nothing
     if (isAnimating) return;
@@ -166,7 +163,7 @@ function showSlide(index) {
         }
 
         // enable changing mode checkbox (disabled when changing mode)
-        checkbox.disabled = false;
+        themeToggle.disabled = false;
     }, 300);
 }
 
@@ -181,6 +178,11 @@ document.addEventListener('keydown', function(event) {
         if (currentSlide < selectedSlides.length - 1) {
             showSlide(currentSlide + 1);
         }
+    }
+    // Change theme with the space bar
+    if (event.key === ' ' && themeToggle.disabled === false) {
+        themeToggle.checked = !themeToggle.checked;
+        changeTheme();
     }
 });
 
@@ -199,15 +201,19 @@ function showPreviousSlide() {
 }
 
 themeToggle.addEventListener('change', () => {
+    changeTheme();
+});
+
+function changeTheme() {
     // Disable the switch while the animation is in progress (enable back at the end of this one)
-    checkbox.disabled = true;
+    themeToggle.disabled = true;
     // Toggle the theme
     body.classList.toggle('op-mode');
     selectionDiv.classList.toggle('op-mode');
     isOpMode = !isOpMode;
     // Show slide from the new theme
     showSlide(currentSlide);
-});
+}
 
 // Init carousel with the first slide
 showSlide(0);
