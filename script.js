@@ -178,7 +178,7 @@ document.addEventListener('keydown', function(event) {
         }
     }
     if (event.key === 'ArrowRight') {
-        if (currentSlide < slides.length - 1) {
+        if (currentSlide < selectedSlides.length - 1) {
             showSlide(currentSlide + 1);
         }
     }
@@ -186,7 +186,7 @@ document.addEventListener('keydown', function(event) {
 
 function showNextSlide() {
     // When the user click on the right arrow, the next slide is displayed
-    if (currentSlide < slides.length - 1) {
+    if (currentSlide < selectedSlides.length - 1) {
         showSlide(currentSlide + 1);
     }
 }

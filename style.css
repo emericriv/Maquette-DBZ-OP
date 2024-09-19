@@ -213,6 +213,10 @@ body.op-mode {
     width : 50px;
 }
 
+#round-film-red {
+    border-radius: 5px;
+}
+
 .dbz .title {
     font-family: 'Saiyan Sans', sans-serif;
     font-size: 50px;
