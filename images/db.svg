@@ -1,0 +1,20 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Cercle extérieur de la boule de cristal -->
+  <circle cx="100" cy="100" r="90" stroke="black" stroke-width="5" fill="none" />
+
+  <!-- Première étoile (ligne 1, gauche) -->
+  <polygon points="80,70 85,80 95,80 87,87 90,97 80,90 70,97 73,87 65,80 75,80"
+           fill="black" />
+
+  <!-- Deuxième étoile (ligne 1, droite) -->
+  <polygon points="120,70 125,80 135,80 127,87 130,97 120,90 110,97 113,87 105,80 115,80"
+           fill="black" />
+
+  <!-- Troisième étoile (ligne 2, gauche) -->
+  <polygon points="80,110 85,120 95,120 87,127 90,137 80,130 70,137 73,127 65,120 75,120"
+           fill="black" />
+
+  <!-- Quatrième étoile (ligne 2, droite) -->
+  <polygon points="120,110 125,120 135,120 127,127 130,137 120,130 110,137 113,127 105,120 115,120"
+           fill="black" />
+</svg>

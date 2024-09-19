@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'one-piece';
+    src: url('font/one-piece-font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Réinitialiser les marges et le padding */
 * {
     margin: 0;
@@ -19,24 +26,114 @@ body, html {
     overflow: hidden; /* Supprime les barres de défilement */
     background-color: #e76a24;
     color : #fff;
+    background-attachment: fixed;
+}
+
+.toggle-container {
+	text-align: center;
+    position: fixed;
+    top: 10px;
+    right: 15px;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #0b3075;
+	transition: 0.3s;
+	border-radius: 34px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: #e76a24;
+	transition: 0.3s;
+	border-radius: 50%;
+}
+
+.switch-icon {
+    position: absolute;
+    pointer-events: none; /* Assure que le SVG ne bloque pas les clics */
+	left: 5px;
+	bottom: 5px;
+    width: 24px; /* Ajuste la taille du SVG selon tes besoins */
+    height: 24px;
+    transition: transform 0.3s, opacity 0.3s;
+    user-select: none;
+}
+
+.dbz-icon {
+    opacity: 1;
+}
+
+.op-icon {
+    clip-path: circle(50%); /* Masque les parties de l'image qui dépassent du cercle */
+    opacity: 0;
+}
+
+input:checked + .slider:before {
+	background-color: #0b3075;
+    transform: translate3d(26px, 0, 0); /* Ajuste selon la largeur du slider */
+}
+
+input:checked + .slider .dbz-icon {
+    opacity: 0;
+    transform: translate3d(26px, 0, 0);
+}
+
+input:checked + .slider .op-icon {
+    opacity: 1;
+    transform: translate3d(26px, 0, 0);
+}
+
+body.op-mode {
+    will-change: background-color;
+	background-color: #0b3075;
+}
+
+.op-mode input:checked + .slider {
+	background-color: #e76a24;
 }
 
 .container {
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 2%;
 }
 
-.slider {
+.caroussel {
     position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 85%;
-    height: 92%;
+    height: 95%;
     list-style: none;
     overflow: hidden;
 }
@@ -46,17 +143,17 @@ body, html {
     top: 0;
     left: 0;
     width: 100%;
-    height: 87%;
+    height: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .left {
-    flex: 3;
+    flex: 2;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: stretch;
     padding: 0px 40px;
     height: 100%;
@@ -64,18 +161,17 @@ body, html {
 
 .left>.infos {
     opacity : 0;
-    transform: translateX(15%);
+    transform: translate3d(15%, 0, 0);
     transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
 }
 
 .left>.date>span {
     opacity: 0;
-    transform: translateX(15%);
+    transform: translate3d(15%, 0, 0);
 }
 
 .slide.active>.left>.date>span{
     transform: translate3d(0, 0, 0);
-    transform: translateX(0);
     opacity: 1;
 }
 
@@ -97,7 +193,6 @@ body, html {
     opacity: 1;
 }
  
-
 .title-header {
     width : 100%;
     display: flex;
@@ -112,10 +207,16 @@ body, html {
     width : 50px;
 }
 
-.title {
+.dbz .title {
     font-family: 'Saiyan Sans', sans-serif;
     font-size: 50px;
     word-spacing: -20px; /* Réduit l'espace entre les mots */
+}
+
+.op .title {
+    font-family: 'one-piece', sans-serif;
+    font-size: 50px;
+    word-spacing: -5px; /* Réduit l'espace entre les mots */
 }
 
 .resume{
@@ -136,7 +237,7 @@ body, html {
 }
 
 .right {
-    flex: 2;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -152,49 +253,92 @@ body, html {
     max-height: 100%;
     height: auto;
     object-fit: contain;
-    opacity: 0;
+    transition : none;
     transform: translateX(100%);
     overflow: hidden;
 }
 
+.slide.shiftleft>.right img{
+    transition: none; 
+    transform: translate3d(-100%, 0, 0);
+    z-index: 0;
+}
+
 .slide.previousleft>.right img{
-    transition: transform 300ms ease-in-out; /* Animation de l'image mais que pour l'apparition */
-    transform: translateX(-100%);
-    opacity: 1;
-    z-index: 1;
+    transition: transform 300ms ease-in-out;
+    transform: translate3d(-100%, 0, 0);
+    z-index: 0;
 }
 
 .slide.previousright>.right img{
-    transition: transform 300ms ease-in-out; /* Animation de l'image mais que pour l'apparition */
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 1;
+    transition: transform 300ms ease-in-out;
+    transform: translate3d(100%, 0, 0);
+    z-index: 0;
 }
 
 .slide.active>.right img{
-    transition: transform 300ms ease-in-out; /* Animation de l'image mais que pour l'apparition */
-    transform: translateX(0);
-    opacity: 1;
+    transition: transform 300ms ease-in-out;
+    transform: translate3d(0%, 0, 0);
     z-index: 1;
 }
 
+.selection {
+    width: 85%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.arrows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.arrow.disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.left-arrow {
+    margin-right: 20px;
+}
+
+.right-arrow {
+    margin-left: 20px;
+}
+
+.selection svg {
+    fill: #0b3075;
+}
+
+.op-mode.selection svg {
+    fill: #e76a24;
+}
+
 .dots {
-    position: absolute;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    gap: 200px;
+    gap: 250px;
 }
 
 .dot {
     width: 30px;
     height: 30px;
-    background-color: #1c4595; /* Couleur de base du point */
+    background-color: #0b3075; /* Couleur de base du point */
     border-radius: 50%;
     display: inline-block;
-    border: 2px solid #1c4595;
+    border: 2px solid #0b3075;
     position: relative;
 }
 
@@ -203,12 +347,17 @@ body, html {
     content: '';
     position: absolute;
     top: 50%;
-    left: -202px;
-    width: 200px;
-    height: 3px;
-    background-color: #1c4595;
+    left: -253px;
+    width: 252px;
+    height: 6px;
+    background-color: #0b3075;
     transform: translateY(-50%);
     z-index: 0;
+}
+
+.op-mode .dot::before, .op-mode .dot {
+    background-color: #e76a24; /* Même couleur que la dot */
+    border-color: #e76a24;
 }
 
 .dot:first-child::before {
@@ -220,18 +369,22 @@ body, html {
     content: '';
     position: absolute;
     top: 50%;
-    left: -202px;
+    left: -254px;
     width: 0;
-    height: 3px;
-    background-color: #fbbc42;
+    height: 2px;
+    background-color: #e76a24;
     transform: translateY(-50%);
     transform-origin: left;
     z-index: 1;
     transition: width 0.15s ease-in-out;
 }
 
+.op-mode .dot::after {
+    background-color: #0b3075; /* Même couleur que la dot */
+}
+
 .dot.active::after {
-    width: 200px;
+    width: 254px;
 }
 
 .dot:not(.active)::after {
@@ -250,11 +403,15 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fbbc42; /* Même couleur que la dot */
+    background-color: #e76a24; /* Même couleur que la dot */
     border-radius: 50%;
     clip-path: inset(0 100% 0 0); /* Remplissage de gauche à droite */
     z-index: 2;
     transition: clip-path 0.15s ease-in-out;
+}
+
+.op-mode .dot .fill {
+    background-color: #0b3075; /* Même couleur que la dot */
 }
 
 /* Remplir le cercle lorsque actif */
