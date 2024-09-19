@@ -183,7 +183,7 @@ document.addEventListener('keydown', function(event) {
         }
     }
     // Change theme with the space bar
-    if (event.key === ' ' && wait === false) {
+    if (event.key === ' ' && !wait && !isAnimating) {
         wait = true;
         themeToggle.checked = !themeToggle.checked;
         changeTheme();
@@ -213,6 +213,7 @@ themeToggle.addEventListener('change', () => {
 
 function changeTheme() {
     // Disable the switch while the animation is in progress (enable back at the end of this one)
+    if (isAnimating) return;
     themeToggle.disabled = true;
     // Toggle the theme
     body.classList.toggle('op-mode');
