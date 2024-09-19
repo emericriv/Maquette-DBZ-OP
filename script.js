@@ -33,6 +33,8 @@ const body = document.body;
 // Allows to know which theme is currently displayed
 let isOpMode = false;
 
+let wait = false;
+
 function showSlide(index) {
     // if an animation is in progress, do nothing
     if (isAnimating) return;
@@ -180,9 +182,13 @@ document.addEventListener('keydown', function(event) {
         }
     }
     // Change theme with the space bar
-    if (event.key === ' ' && themeToggle.disabled === false) {
+    if (event.key === ' ' && wait === false) {
+        wait = true;
         themeToggle.checked = !themeToggle.checked;
         changeTheme();
+        setTimeout(() => {
+            wait = false;
+        }, 500);
     }
 });
 
