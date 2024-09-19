@@ -33,6 +33,7 @@ const body = document.body;
 // Allows to know which theme is currently displayed
 let isOpMode = false;
 
+// wait is a flag to prevent multiple theme changes at the same time
 let wait = false;
 
 function showSlide(index) {
