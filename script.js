@@ -12,6 +12,10 @@ const opDates = document.querySelectorAll('.op .date');
 const dates = document.querySelectorAll('.date');
 let selectedDates = dbzDates;
 
+// Variables to handles the span of the dates
+let old_spans;
+let new_spans;
+
 // Constants to handle the dots and arrow state (enabled or disabled)
 const dots = document.querySelectorAll('.dot');
 const rightArrow = document.querySelector('.right-arrow');
@@ -113,8 +117,18 @@ function showSlide(index) {
     }
     
     // Getting dates span from the previous slide and the new one to prepare transition
-    const new_spans = selectedDates[currentSlide].querySelectorAll('span');
-    const old_spans = selectedDates[oldSlide].querySelectorAll('span');
+    if (oldSlide == currentSlide) {
+        // means that we changed the mode
+        new_spans = selectedDates[currentSlide].querySelectorAll('span');
+        if (selectedDates == dbzDates) {
+            old_spans = opDates[currentSlide].querySelectorAll('span');
+        } else {
+            old_spans = dbzDates[currentSlide].querySelectorAll('span');
+        }        
+    } else {
+        new_spans = selectedDates[currentSlide].querySelectorAll('span');
+        old_spans = selectedDates[oldSlide].querySelectorAll('span');
+    }
 
     // Adding transition class to both old and new dates 
     new_spans.forEach(function callback(span, spanindex) {

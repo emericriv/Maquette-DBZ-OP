@@ -162,7 +162,7 @@ body.op-mode {
 .left>.infos {
     opacity : 0;
     transform: translate3d(15%, 0, 0);
-    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+    transition: none;
 }
 
 .left>.date>span {
@@ -173,6 +173,12 @@ body.op-mode {
 .slide.active>.left>.date>span{
     transform: translate3d(0, 0, 0);
     opacity: 1;
+}
+
+.slide.shiftleft>.left>.infos, .slide.shiftleft>.left>.date>.transition{
+    transition: none; 
+    transform: translate3d(-15%, 0, 0);
+    z-index: 0;
 }
 
 .slide.previousleft>.left>.infos, .slide.previousleft>.left>.date>.transition {
